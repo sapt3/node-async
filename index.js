@@ -1,7 +1,7 @@
 const request = require('request');
 const yargs = require('yargs');
 
-const argv = yarg
+const argv = yargs
   .options({
     a:{
       demand: true,
@@ -15,10 +15,12 @@ const argv = yarg
   .argv;
 
 
-  console.log(argv);
+  var address = encodeURIComponent(argv.a);
+  // console.log(address);
 request({
-  url: 'https://maps.googleapis.com/maps/api/geocode/json?address=AJ-65%20Sector-II,%20Salt%20Lake%20City',
+  url: `https://maps.googleapis.com/maps/api/geocode/json?address=${address}`,
   json: true
 }, (error, response, body)=> {
-  console.log(JSON.stringify(body, undefined, 2));
+  // console.log(JSON.stringify(body, undefined, 2));
+  console.log(body.results[0].formatted_address);
 })
